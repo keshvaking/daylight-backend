@@ -43,19 +43,7 @@ except ImportError:
 # FLASK APP
 # ══════════════════════════════════════════════════════════════════
 app = Flask(__name__, static_folder="static")
-CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=False)
-
-# Extra CORS headers on every response (belt + braces)
-@app.after_request
-def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"]  = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-    return response
-
-@app.route("/api/<path:path>", methods=["OPTIONS"])
-def options_handler(path):
-    return "", 204
+CORS(app)
 
 # ══════════════════════════════════════════════════════════════════
 # GLOBAL STATE  (thread-safe with Lock)

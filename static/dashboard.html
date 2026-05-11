@@ -821,16 +821,16 @@ canvas { display: block; }
 // BACKEND CONFIG
 // ══════════════════════════════════════════════════════════════════
 const API = {
-  BASE: `http://${window.location.hostname}:5000`,
-  status:  () => fetch(`http://${window.location.hostname}:5000/api/status`).then(r=>r.json()),
-  logs:    () => fetch(`http://${window.location.hostname}:5000/api/logs`).then(r=>r.json()),
-  results: () => fetch(`http://${window.location.hostname}:5000/api/results`).then(r=>r.json()),
-  paper:   () => fetch(`http://${window.location.hostname}:5000/api/paper/state`).then(r=>r.json()),
-  start:   (cfg) => fetch(`http://${window.location.hostname}:5000/api/start`, {
+  BASE: '',
+  status:  () => fetch(`/api/status`).then(r=>r.json()),
+  logs:    () => fetch(`/api/logs`).then(r=>r.json()),
+  results: () => fetch(`/api/results`).then(r=>r.json()),
+  paper:   () => fetch(`/api/paper/state`).then(r=>r.json()),
+  start:   (cfg) => fetch(`/api/start`, {
     method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(cfg)
   }).then(r=>r.json()),
-  stop:    () => fetch(`http://${window.location.hostname}:5000/api/stop`, {method:'POST'}).then(r=>r.json()),
-  reset:   () => fetch(`http://${window.location.hostname}:5000/api/reset`, {method:'POST'}).then(r=>r.json()),
+  stop:    () => fetch(`/api/stop`, {method:'POST'}).then(r=>r.json()),
+  reset:   () => fetch(`/api/reset`, {method:'POST'}).then(r=>r.json()),
 };
 
 // ══════════════════════════════════════════════════════════════════
@@ -898,7 +898,7 @@ function updateConnectionUI(ok) {
 // ══════════════════════════════════════════════════════════════════
 function connectSSE() {
   if(state.sse) state.sse.close();
-  const url = `${API.BASE}/api/stream`;
+  const url = `/api/stream`;
   const es = new EventSource(url);
   state.sse = es;
 
