@@ -1,0 +1,7 @@
+flask>=3.0
+flask-cors>=4.0
+python-binance>=1.0.17
+pandas>=2.0
+numpy>=1.26
+matplotlib>=3.8
+gunicorn
